@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        span {
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        .right {
+            color: green;
+        }
+        
+        .wrong {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <p>This is an regular expression example: enter username 
+        <br>Must be 6-16 characters long, 
+        can contain any letters from a to z, any numbers from 0 through 9, special characters _ and - </p>
+    <input type="text" class="uname"> <span>Enter Username</span>
+    <script>
+        var reg = /^[a-zA-Z0-9_-]{6,16}$/; 
+        var uname = document.querySelector('.uname');
+        var span = document.querySelector('span');
+        uname.onblur = function() {
+            if (reg.test(this.value)) {
+                span.className = 'right';
+                span.innerHTML = 'Correct username format';
+            } else {
+                span.className = 'wrong';
+                span.innerHTML = 'Wrong username format';
+            }
+        }
+    </script>
+</body>
+
+</html>

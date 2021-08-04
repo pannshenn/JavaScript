@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>This is a closure example: closure & Immediately Invoked Function</p>
+    <h1>Click any lsit item below to see its index</h1>
+    <ul class="nav">
+        <li>Apple</li>
+        <li>Potato</li>
+        <li>Water</li>
+        <li>Beef</li>
+    </ul>
+    <p class='msg'></p>
+    <script>
+        // Example: Output <li> index when clicked
+        // Method 1. Add an index property to <li> 
+        var lis = document.querySelector('.nav').querySelectorAll('li');
+        var msg = document.querySelector('.msg');
+        
+        for (var i = 0; i < lis.length; i++) {
+            lis[i].index = i;
+            lis[i].onclick = function() {
+                // console.log(i);
+                console.log(this.index);
+            }
+        }
+
+        // Closure Example
+        // Method 2. Use Closure (a function inside its parent function has access to parent function's variables)
+        for (var i = 0; i < lis.length; i++) {
+            // Immediately Invoked Function made in each loop 
+            // Child function inside the parent Immediately Invoked Function has access to its variable i
+            (function(i) {
+                // console.log(i);
+                lis[i].onclick = function() {
+                    msg.innerText = "The index of the <li> element you clicked is " + i;
+                    console.log(i);
+                }
+            })(i);
+        }
+    </script>
+</body>
+
+</html>

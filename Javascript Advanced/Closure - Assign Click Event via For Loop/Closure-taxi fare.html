@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <script>
+        // Closure Example: Calculate Taxi Fare
+        // Parent function variable 1 - Initial charge
+        // Parent function variable 2 - Total fare
+        // Return Child function 1 - Stardard Total Fare function 
+        // Return Child function 2 - Total Fare with Traffic function (extra $10)
+     
+        var car = (function() {
+            var initial = 13; //  Initial charge
+            var total = 0; // Total fare
+            return {
+                // Standard Total Fare function
+                price: function(n) {
+                    if (n <= 3) {
+                        total = initial;
+                    } else {
+                        total = initial + (n - 3) * 5
+                    }
+                    return total;
+                },
+                // Total Fare with Traffic function
+                traffic: function(flag) {
+                    return flag ? total + 10 : total;
+                }
+            }
+        })(); // car is the returned object from the Immediately Invoked Function
+
+        console.log(car.price(5)); // 23
+        console.log(car.traffic(true)); // 33
+
+        console.log(car.price(1)); // 13
+        console.log(car.traffic(false)); // 13
+    </script>
+</body>
+
+</html>

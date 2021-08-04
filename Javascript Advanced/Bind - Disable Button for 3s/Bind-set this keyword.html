@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>This is a bind() method example: bind & setTimeout in a for loop</p>
+    <h1>Click Any Button to Disable it for 3 seconds</h1>
+    <button>Click Me</button>
+    <button>Click Me</button>
+    <button>Click Me</button>
+    <p>setTimeout runs a function when time is up, the functon is executed by window, thus this keyword in the function points to window.
+        <br>
+        However in most cases, we want this keyword to be passed in the context where we define setTimeout
+    </p>
+    <script>
+        // Simple bind() Example 
+        var o = {
+            name: 'andy'
+        };
+
+        function fn(a, b) {
+            console.log(this);
+            console.log(a + b);
+        };
+        var f = fn.bind(o, 1, 2); // a new function f whose this keyword points to o object
+        f(); // {name: 'andy'} 3
+
+        // bind() method explain:
+        // 1. Set this keyword to a designated object 
+        // 2. Return a new function
+        // 3. Won't run the function
+
+        // Click a Button to Disable it
+        // var btn1 = document.querySelector('button');
+        // btn1.onclick = function() {
+        //     this.disabled = true; // this keyword points to btn 
+        //     // var that = this;
+        //     setTimeout(function() {
+        //         // that.disabled = false; // inside setTimeout(), this keyword points to window
+        //         this.disabled = false; // with the help of bind(), this keyword now points to btn
+        //     }.bind(this), 3000); // this sent to bind(this) points to btn inside the function(){}
+        // }
+        var btns = document.querySelectorAll('button');
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].onclick = function() {
+                this.disabled = true;
+                setTimeout(function() {
+                    this.disabled = false;
+                }.bind(this), 2000);
+            }
+        }
+    </script>
+</body>
+
+</html>
